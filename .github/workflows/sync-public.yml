@@ -15,7 +15,7 @@ jobs:
       
       - name: Sync from public repo
         run: |
-          git clone https://github.com/user/public-repo.git temp-public
+          git clone https://github.com/danny-avila/LibreChat temp-public
           cp -r temp-public/ ./
           rm -rf temp-public
           
