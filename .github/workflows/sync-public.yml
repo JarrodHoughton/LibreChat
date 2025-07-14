@@ -1,0 +1,28 @@
+# .github/workflows/sync-public.yml
+name: Sync Public Repo
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # Every 5 minutes
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Sync from public repo
+        run: |
+          git clone https://github.com/user/public-repo.git temp-public
+          cp -r temp-public/ ./
+          rm -rf temp-public
+          
+      - name: Commit changes
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add .
+          git diff --staged --quiet || git commit -m "sync: update from public repo"
+          git push
