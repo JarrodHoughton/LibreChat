@@ -15,10 +15,10 @@ jobs:
       
       - name: Sync from public repo
         run: |
-          git clone https://github.com/danny-avila/LibreChat temp-public
-          cp -r temp-public/ ../
-          rm -rf temp-public
-          
+          git clone https://github.com/danny-avila/LibreChat ./temp-public
+          cp -r ./temp-public/ ./
+          rm -rf ./temp-public
+
       - name: Commit changes
         run: |
           git config user.name "GitHub Actions"
